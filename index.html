@@ -1,1 +1,76 @@
-<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ReplyCraft — AI Reply Prompt Builder</title><style>body{font:16px system-ui;background:#f5f7fb;color:#172033;margin:0}.wrap{max-width:760px;margin:45px auto;padding:25px}h1{font-size:42px}label{display:block;margin:18px 0 7px;font-weight:700}textarea,select,input{width:100%;box-sizing:border-box;padding:13px;border:1px solid #cbd5e1;border-radius:9px;font:inherit}textarea{min-height:120px}button{background:#174ee5;color:white;border:0;border-radius:9px;padding:14px 20px;margin:18px 8px 0 0;cursor:pointer}.card{background:white;border-radius:18px;padding:28px;box-shadow:0 8px 30px #142c5014}.muted{color:#5b6474}#result{white-space:pre-wrap;background:#eef3ff;padding:18px;border-radius:10px;margin-top:18px}a{color:#174ee5}</style><div class="wrap"><h1>ReplyCraft</h1><p class="muted">Turn customer messages into professional AI-ready replies in seconds. No signup required.</p><div class="card"><label for="msg">Customer message</label><textarea id="msg" placeholder="Paste a customer message here..."></textarea><label for="kind">Situation</label><select id="kind"><option>Customer support</option><option>Refund request</option><option>Angry customer</option><option>Sales inquiry</option><option>Follow-up</option><option>Review response</option></select><label for="tone">Tone</label><select id="tone"><option>Friendly and professional</option><option>Warm and empathetic</option><option>Concise and direct</option><option>Formal</option></select><label for="brand">Business name (optional)</label><input id="brand" placeholder="Your business"><button onclick="build()">Build AI prompt</button><button onclick="copy()">Copy prompt</button><div id="result" aria-live="polite">Your prompt will appear here.</div><p class="muted">Paste the generated prompt into your preferred AI chat. This free tool prepares prompts; it does not call an AI model itself.</p></div><p class="muted">Privacy: messages are processed in your browser and are not sent to this website. Avoid sharing sensitive customer information with external AI services.</p><script>function build(){let m=document.getElementById('msg').value.trim();if(!m){document.getElementById('result').textContent='Please enter a customer message.';return}let k=document.getElementById('kind').value,t=document.getElementById('tone').value,b=document.getElementById('brand').value.trim();document.getElementById('result').textContent=`You are a skilled customer service representative${b?' for '+b:''}. Draft a ready-to-send English reply to the following customer message.\nSituation: ${k}\nTone: ${t}\nRules: Be accurate, clear, helpful and human. Do not invent policies, promises, refunds, dates, or facts. If essential information is missing, use [PLACEHOLDER] instead of guessing. Keep it under 140 words. Output only the reply.\n\nCustomer message:\n${m}`};function copy(){let s=document.getElementById('result').textContent;if(s.startsWith('You are'))navigator.clipboard.writeText(s).then(()=>alert('Copied!')).catch(()=>alert('Select the prompt and copy manually.'))}</script></div></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Create customer support prompts for free, or order affordable personalized customer reply templates for your business.">
+  <title>ReplyCraft — AI Reply Prompt Builder</title>
+  <style>
+    :root{color-scheme:light;--blue:#174ee5;--dark:#172033;--muted:#566176;--border:#d7e0ee}
+    *{box-sizing:border-box}body{font:16px system-ui,-apple-system,Segoe UI,sans-serif;background:#f5f7fb;color:var(--dark);margin:0;line-height:1.55}
+    .wrap{max-width:850px;margin:35px auto;padding:22px}h1{font-size:clamp(32px,5vw,44px);margin:0 0 16px}h2{margin:8px 0 12px;font-size:25px}h3{margin:0;font-size:22px}
+    label{display:block;margin:18px 0 7px;font-weight:700}textarea,select,input{width:100%;padding:13px;border:1px solid #cbd5e1;border-radius:9px;font:inherit;background:#fff}textarea{min-height:120px}
+    button,.buy{background:var(--blue);color:white;border:0;border-radius:9px;padding:12px 18px;cursor:pointer;font:600 14px system-ui;display:inline-block;text-decoration:none}
+    button{margin:16px 8px 0 0}button:hover,.buy:not([aria-disabled="true"]):hover{background:#1039ae}.card{background:white;border-radius:18px;padding:26px;box-shadow:0 8px 30px #142c5014}
+    .muted{color:var(--muted)}#result{white-space:pre-wrap;overflow-wrap:anywhere;background:#eef3ff;padding:18px;border-radius:10px;margin-top:18px}
+    .plans{margin-top:24px}.plan-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:18px}.plan{background:#fff;border:1px solid var(--border);border-radius:16px;padding:22px;display:flex;flex-direction:column}
+    .featured{border:2px solid var(--blue)}.pill{display:inline-block;font-size:12px;background:#eaf1ff;padding:5px 10px;border-radius:20px;color:#174ee5;font-weight:700;width:max-content;margin-bottom:12px}
+    .price{font-size:42px;font-weight:800;margin:7px 0 0}.price small{font-size:14px;font-weight:400}.features{padding-left:20px;flex:1}.features li{margin:8px 0}
+    .buy{display:block;text-align:center;margin-top:15px}.buy[aria-disabled="true"]{background:#8da7eb;cursor:not-allowed}.note{font-size:13px;margin:10px 0 0}.fineprint{font-size:14px;margin-top:20px}
+    @media(max-width:620px){.wrap{margin:8px auto;padding:14px}.card{padding:19px}.plan-grid{grid-template-columns:1fr}.plan{padding:20px}}
+  </style>
+</head>
+<body>
+<main class="wrap">
+  <h1>ReplyCraft</h1>
+  <p class="muted">Build professional AI-ready customer reply prompts in seconds. No signup required.</p>
+  <section class="card" aria-label="Free AI prompt builder">
+    <label for="msg">Customer message</label>
+    <textarea id="msg" placeholder="Paste a customer message here..."></textarea>
+    <label for="kind">Situation</label>
+    <select id="kind"><option>Customer support</option><option>Refund request</option><option>Angry customer</option><option>Sales inquiry</option><option>Follow-up</option><option>Review response</option></select>
+    <label for="tone">Tone</label>
+    <select id="tone"><option>Friendly and professional</option><option>Warm and empathetic</option><option>Concise and direct</option><option>Formal</option></select>
+    <label for="brand">Business name (optional)</label>
+    <input id="brand" placeholder="Your business">
+    <button type="button" onclick="build()">Build AI prompt</button>
+    <button type="button" onclick="copyPrompt()">Copy prompt</button>
+    <div id="result" role="status" aria-live="polite">Your prompt will appear here.</div>
+    <p class="muted fineprint">Copy the prompt into your preferred AI chat. This free tool prepares prompts; it does not call an AI model itself.</p>
+  </section>
+  <section class="plans" aria-labelledby="plan-heading">
+    <h2 id="plan-heading">Need ready-to-use replies?</h2>
+    <p class="muted">We write personalized English customer response templates for your business. One-time payment, no subscription.</p>
+    <div class="plan-grid" style="grid-template-columns:minmax(0,480px);justify-content:center">
+      <article class="plan featured">
+        <span class="pill">ONE SIMPLE PRICE</span>
+        <h3>ReplyCraft Custom Pack</h3>
+        <p class="price">$2 <small>one-time</small></p>
+        <ul class="features"><li>5 personalized customer reply templates</li><li>Based on your business questions</li><li>Editable English text delivered by email</li><li>Within 48 hours after we receive your details</li></ul>
+        <a class="buy" id="buy-pack" href="https://paypal.me/vensubs/2USD" target="_blank" rel="noopener noreferrer">Pay $2 with PayPal</a>
+        <p class="muted note">PayPal.Me pre-fills $2 USD, but the payer may be able to change the amount. This is not a locked-price checkout. Please confirm your order details before paying.</p>
+      </article>
+    </div>
+    <p class="muted fineprint">After purchasing, share your business name, relevant policies, common customer questions and tone preferences. Templates are drafts to review before sending. Please don't send sensitive customer data.</p>
+  </section>
+  <p class="muted fineprint">Privacy: text you enter in the free tool stays in your browser and is not sent to this site. Avoid sharing sensitive information with external AI services.</p>
+</main>
+<script>
+  // PayPal.Me pre-fills the amount but is not a locked-price checkout.
+  function build(){
+    const m=document.getElementById('msg').value.trim();
+    const result=document.getElementById('result');
+    if(!m){result.textContent='Please enter a customer message.';return;}
+    const k=document.getElementById('kind').value;
+    const t=document.getElementById('tone').value;
+    const b=document.getElementById('brand').value.trim();
+    result.textContent=`You are a skilled customer service representative${b?' for '+b:''}. Draft a ready-to-send English reply to the following customer message.\nSituation: ${k}\nTone: ${t}\nRules: Be accurate, clear, helpful and human. Do not invent policies, promises, refunds, dates, or facts. If essential information is missing, use [PLACEHOLDER] instead of guessing. Keep it under 140 words. Output only the reply.\n\nCustomer message:\n${m}`;
+  }
+  function copyPrompt(){
+    const text=document.getElementById('result').textContent;
+    if(!text.startsWith('You are'))return;
+    navigator.clipboard.writeText(text).then(()=>alert('Copied!')).catch(()=>alert('Select the prompt and copy manually.'));
+  }
+</script>
+</body>
+</html>
